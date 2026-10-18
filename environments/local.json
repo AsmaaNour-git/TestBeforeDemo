@@ -1,0 +1,13 @@
+{
+  "name": "dev",
+  "values": [
+    { "key": "baseUrl", 
+    "value": "http://localhost:8998/v1/hello-demo",
+     "type": "default", "enabled": true },
+
+
+      { "key": "expectedEnv", "value": "dev", "type": "default", "enabled": true }
+ 
+  ],
+  "_postman_variable_scope": "environment"
+}
