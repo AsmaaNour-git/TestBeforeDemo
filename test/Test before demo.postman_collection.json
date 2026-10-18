@@ -1,0 +1,104 @@
+{
+  "info": {
+    "_postman_id": "46649e29-a8f8-48e7-9f78-231c60c6290a",
+    "name": "Test before demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58875161",
+    "_collection_link": "https://go.postman.co/collection/58875161-46649e29-a8f8-48e7-9f78-231c60c6290a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET - Hello with valid name",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response is JSON\", function () {\r\n    pm.response.to.be.json;\r\n});\r\n\r\npm.test(\"Response contains the expected greeting\", function () {\r\n    const body = pm.response.json();\r\n\r\n    pm.expect(body.message).to.eql(\"Hello, Asmaa!\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}?name=Asmaa",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "Asmaa"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET - Hello without name",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"Status code is 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\n\r\npm.test(\"Response contains an error message\", function () {\r\n    const body = pm.response.text();\r\n\r\n    pm.expect(body).to.include(\r\n        \"The name query parameter is required.\"\r\n    );\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}",
+          "host": [
+            "{{baseUrl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET - Hello with empty name",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"Status code is 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\n\r\npm.test(\"Response contains the expected error\", function () {\r\n    pm.expect(pm.response.text()).to.include(\r\n        \"The name query parameter is required.\"\r\n    );\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}?name=",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    }
+  ]
+}
