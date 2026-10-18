@@ -22,9 +22,9 @@ steps:
     args:
       - -c
       - |
-        sed -i 's#<Description>.*</Description>#<Description>hello-v1 | commit ${SHORT_SHA} | build ${BUILD_ID}</Description>#' \
-          src/main/apigee/apiproxies/hello-v1/apiproxy/hello-v1.xml
-        grep '<Description>' src/main/apigee/apiproxies/hello-v1/apiproxy/hello-v1.xml
+        sed -i 's#<Description>.*</Description>#<Description>hello-demo | commit ${SHORT_SHA} | build ${BUILD_ID}</Description>#' \
+          src/main/apigee/apiproxies/hello-demo/apiproxy/hello-demo.xml
+        grep '<Description>' src/main/apigee/apiproxies/hello-demo/apiproxy/hello-demo.xml
 
   # Quality gate 1
   - id: lint
@@ -42,7 +42,7 @@ steps:
   - id: deploy-dev
     name: maven:3.9.9-eclipse-temurin-17
     entrypoint: bash
-    args: ['-c', 'mvn -B -f src/main/apigee/apiproxies/hello-v1/pom.xml clean install -Pdev "-Dbearer=$$(cat /workspace/.token)"']
+    args: ['-c', 'mvn -B -f src/main/apigee/apiproxies/hello-demo/pom.xml clean install -Pdev "-Dbearer=$$(cat /workspace/.token)"']
 
   - id: wait-dev
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
